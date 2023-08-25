@@ -1,20 +1,26 @@
 # Busca quadrática
 
+def quadraticSearch(vet, search):
+    counter = 0
+    position = -1
+    comeIn = False
+
+    for key, value1 in enumerate(vet):
+        for value2 in enumerate(vet):
+            if value1 == search:
+                if not cameIn:
+                    position = key
+                    if value2 == search:
+                        counter += 1
+
+        if counter > 0:
+            cameIn = True
+
+    if cameIn:
+        print("Posição: " + str(position) + " - Contador de repetição: " + str(counter))
+
+    return position
+
 vet = [2, 4, 5, 6, 2, 4, 9, 4, 5, 6]
-numberSearched = 4
-counter = 0
-position = -1
-cameIn = False
 
-for key1, value1 in enumerate(vet):
-    for key2, value2 in enumerate(vet):
-        if vet[key1] == numberSearched:
-            if cameIn:
-                position = key1
-                if vet[key2] == numberSearched:
-                    counter += 1
-    if counter > 0:
-        cameIn = True
-
-if cameIn:
-    print("Posição: " + str(position) + " - Contador de repetição: " + counter)
+quadraticSearch(vet, 2)
