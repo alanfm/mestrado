@@ -35,10 +35,12 @@ def parseFile(file, directory = ''):
     except FileNotFoundError:
         print(f"O arquivo {file} não foi encontrado.")
 
+# Percorre os arquivos encontrados no diretório
 def interationFiles(directory):
     for file in parseDirectory(directory):
         runSearches(parseFile(file, directory))
 
+# Executa o programa
 if __name__ == "__main__":
     directory = 'files/'
     interationFiles(directory)
