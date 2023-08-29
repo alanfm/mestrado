@@ -10,8 +10,9 @@ def parseDirectory(directory):
 
 # Executa a função de busca e retorna o tempo gasto
 def runSearches(vector):
+    value = random.randint(vector[0], vector[len(vector) - 1])
     startTime = time.time()
-    searches.ternary(vector, random.randint(vector[0], vector[len(vector) - 1]))
+    searches.binary(vector, value, 0, len(vector) - 1)
     endTime = time.time()
     return endTime - startTime
 
@@ -31,16 +32,18 @@ def parseFile(file, directory = ''):
     try:
         with open(directory + file, "r") as file:
             vector = generateArray(file)
-        return vector
+        file.close()
+        print(vector)
+        return []
     except FileNotFoundError:
         print(f"O arquivo {file} não foi encontrado.")
 
 # Percorre os arquivos encontrados no diretório
-def interationFiles(directory):
+def iterationFiles(directory):
     for file in parseDirectory(directory):
         runSearches(parseFile(file, directory))
 
 # Executa o programa
 if __name__ == "__main__":
-    directory = 'files/'
-    interationFiles(directory)
+    directory = 'src/files/sorted/'
+    iterationFiles(directory)
