@@ -1,9 +1,7 @@
 # searches
 from array import array
-from memory_profiler import profile
 
 # Busca binária
-@profile
 def binary(vector: array, search: int, start: int, end: int):    
     half = round((start + end) / 2)
     if vector[half] == search:
@@ -16,7 +14,6 @@ def binary(vector: array, search: int, start: int, end: int):
         binary(vector, search, start, half - 1)
 
 # Busca cúbica
-@profile
 def cubic(vector: int, search: int):
     position = -1
 
@@ -29,7 +26,6 @@ def cubic(vector: int, search: int):
     return position
 
 # Busca quadrática
-@profile
 def quadratic(vector: int, search: int):
     counter = 0
     position = -1
@@ -49,7 +45,6 @@ def quadratic(vector: int, search: int):
     return position
 
 # Busca sequencial versão 1
-@profile
 def sequentialV1(vector: int, search: int):
     position = -1
     for key, value in enumerate(vector):
@@ -59,7 +54,6 @@ def sequentialV1(vector: int, search: int):
     return position
 
 # Busca sequencial versão 2
-@profile
 def sequentialV2(vector: int, search: int):
     position = -1
     for key, value in enumerate(vector):
@@ -70,7 +64,6 @@ def sequentialV2(vector: int, search: int):
     return position
 
 # Busca ternária
-@profile
 def ternary(vector: array, search: int):
     start = 0
     end = len(vector) - 1
