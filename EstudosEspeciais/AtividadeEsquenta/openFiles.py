@@ -5,6 +5,9 @@ import random
 import src.searches as searches
 import tracemalloc
 import csv
+import re
+import numpy as np
+from numba import cuda
 
 # Pega todos os arquivos que estão no diretório
 def parseDirectory(directory):
@@ -16,32 +19,31 @@ def runSearches(vector, value, sortFunction):
     startTime = time.time()
     for i in range(20):
         if sortFunction == 'binary':
-            searches.binary(vector, value, 0, len(vector) - 1)
+            result = searches.binary(vector, value, 0, len(vector) - 1)
         elif sortFunction == 'cubic':
-            searches.cubic(vector, value)
+            result = searches.cubic(vector, value)
         elif sortFunction == 'quadratic':
-            searches.quadratic(vector, value)
+            result = searches.quadratic(vector, value)
         elif sortFunction == 'sequentialV1':
-            searches.sequentialV1(vector, value)
+            result = searches.sequentialV1(vector, value)
         elif sortFunction == 'sequentialV2':
-            searches.sequentialV2(vector, value)
+            result = searches.sequentialV2(vector, value)
         elif sortFunction == 'ternary':
-            searches.ternary(vector, value)
+            result = searches.ternary(vector, value)
     memory = tracemalloc.get_traced_memory()
     tracemalloc.stop()
     tracemalloc.clear_traces()
     endTime = time.time()
-    meddleTime = (endTime - startTime) / 20
-    result = [str(f'{meddleTime:.7f}'), (memory[1]), value, sortFunction, str(len(vector)) + '.txt']
-    return result
+    meddleTime = (endTime - startTime) / 20    
+    print('Função: ' + sortFunction, ' | Valor pesquisado: ' + str(value), ' | Tamanho do vetor: ' + str(len(vector)), ' | Resultado: ' + str(result))
+    return [str(f'{meddleTime:.7f}'), (memory[1]), value, sortFunction, str(len(vector)) + '.txt']
 # Gera um vetor com os dados do arquivo
 def generateArray(file):
-    vector = []
     contentLine = file.readline()
+    vector = np.array([])
     while contentLine:
-        vector += [int(element) for element in contentLine.split(',') if element.isdigit()]
+        vector = [int(item) for item in np.concatenate((vector, contentLine.replace(', ', ',').replace(' ', ',').split(','))) if item != '\n']
         contentLine = file.readline()
-
     return vector
 
 # Abre o arquivo e retorna os dados em forma de vetor
@@ -51,9 +53,10 @@ def parseFile(file, directory = ''):
         with open(directory + file, "r") as file:
             vector = generateArray(file)
         file.close()
-        return vector
     except FileNotFoundError:
         print(f"O arquivo {file} não foi encontrado.")
+    
+    return vector
 
 # Percorre os arquivos encontrados no diretório
 def iterationFiles(directory, algorithms, sorted):
@@ -71,12 +74,11 @@ def iterationFiles(directory, algorithms, sorted):
                 vector = parseFile(file, directory)        
                 value = random.choice(vector)
                 spamWriter.writerow(runSearches(vector, value, sort))
-                print(f"Arquivo {file.split('/')[0]} processado.\nFunção de busca: {sort}")
         resultFile.close()
 
 # Executa o programa
 if __name__ == "__main__":
     directory = 'src/files/sorted/'
-    iterationFiles(directory, ['quadratic', 'cubic'], True)
-    directory = 'src/files/unsorted/'
-    iterationFiles(directory, ['quadratic', 'cubic'], False)
+    iterationFiles(directory, ['quadratic'], True)
+    # directory = 'src/files/unsorted/'
+    # iterationFiles(directory, ['quadratic'], False)

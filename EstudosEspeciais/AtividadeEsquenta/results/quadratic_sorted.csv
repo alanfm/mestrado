@@ -1,8 +1,1 @@
-Tempo,MemÃ³ria,Valor,Algoritmo,Arquivo
-0.0189813,744,6842,quadratic,1000.txt
-0.0000129,208,123,quadratic,20.txt
-0.0047728,264,3352,quadratic,500.txt
-0.0000074,208,32,quadratic,10.txt
-0.0002076,208,203,quadratic,100.txt
-0.4739794,264,18012,quadratic,5000.txt
-0.0007903,208,1062,quadratic,200.txt
+Tempo,Memória,Valor,Algoritmo,Arquivo

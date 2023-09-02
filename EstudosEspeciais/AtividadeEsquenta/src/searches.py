@@ -26,7 +26,7 @@ def cubic(vector: int, search: int):
     return position
 
 # Busca quadrática
-def quadratic(vector: int, search: int):
+def quadratic(vector: int, search: int) -> int:
     counter = 0
     position = -1
     cameIn = False
