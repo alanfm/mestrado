@@ -1,21 +1,11 @@
-import src.searches as searches
+import numpy as np
 import random
-import time
+import src.searches as searches
 
-count = 1000
+def main():
+    vector = np.array(range(100000000))
+    value = random.choice(vector)
+    print('Tamanho do vetor: ' + str(len(vector)), '| Valor pesquisado: ' + str(value), '| Resultado: ' + str(searches.binary(vector, value, 0, len(vector) - 1)))
 
-vector = random.sample(range(0, count * 10), count)
-
-start = time.time()
-print(searches.quadratic(vector, vector[10]))
-end = time.time()
-
-diff = end - start
-print("Quadrático. Tempo gasto: " + str(diff))
-
-start = time.time()
-print(searches.cubic(vector, vector[10]))
-end = time.time()
-
-diff = end - start
-print("Cúbico. Tempo gasto: " + str(diff))
+if __name__ == "__main__":
+    main()

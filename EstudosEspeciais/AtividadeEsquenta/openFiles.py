@@ -7,7 +7,6 @@ import tracemalloc
 import csv
 import re
 import numpy as np
-from numba import cuda
 
 # Pega todos os arquivos que estão no diretório
 def parseDirectory(directory):
@@ -39,12 +38,11 @@ def runSearches(vector, value, sortFunction):
     return [str(f'{meddleTime:.7f}'), (memory[1]), value, sortFunction, str(len(vector)) + '.txt']
 # Gera um vetor com os dados do arquivo
 def generateArray(file):
-    contentLine = file.readline()
-    vector = np.array([])
-    while contentLine:
-        vector = [int(item) for item in np.concatenate((vector, contentLine.replace(', ', ',').replace(' ', ',').split(','))) if item != '\n']
-        contentLine = file.readline()
-    return vector
+    start = time.time()
+    vector = np.loadtxt(file, dtype=np.int64, delimiter=',')
+    result = vector.flatten()
+    print('Vetor gerado em: ' + str(time.time() - start) + ' segundos')
+    return result
 
 # Abre o arquivo e retorna os dados em forma de vetor
 def parseFile(file, directory = ''):
@@ -66,7 +64,7 @@ def iterationFiles(directory, algorithms, sorted):
         else:
             resultFileName = 'results/' + sort + '_unsorted.csv'
         with open(resultFileName, 'w') as resultFile:
-            spamWriter = csv.writer(resultFile, dialect='excel')
+            spamWriter = csv.writer(resultFile, delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
             spamWriter.writerow(['Tempo', 'Memória', 'Valor', 'Algoritmo', 'Arquivo'])
             for file in parseDirectory(directory):
                 if (not file.endswith(".txt")):
@@ -80,5 +78,5 @@ def iterationFiles(directory, algorithms, sorted):
 if __name__ == "__main__":
     directory = 'src/files/sorted/'
     iterationFiles(directory, ['quadratic'], True)
-    # directory = 'src/files/unsorted/'
-    # iterationFiles(directory, ['quadratic'], False)
+    directory = 'src/files/unsorted/'
+    iterationFiles(directory, ['quadratic'], False)
