@@ -76,7 +76,7 @@ def iterationFiles(directory, algorithms, sorted):
 
 # Executa o programa
 if __name__ == "__main__":
-    # directory = 'src/files/sorted/'
-    # iterationFiles(directory, ['cubic'], True)
+    directory = 'src/files/sorted/'
+    iterationFiles(directory, ['cubic'], True)
     directory = 'src/files/unsorted/'
-    iterationFiles(directory, ['quadratic', 'cubic'], False)
+    iterationFiles(directory, ['cubic'], False)

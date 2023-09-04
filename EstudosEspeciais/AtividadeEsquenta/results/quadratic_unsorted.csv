@@ -1,8 +1,8 @@
-Tempo,Memória,Valor,Algoritmo,Arquivo
-0.0064992,451,1,quadratic,100.txt
-0.5740002,479,273,quadratic,1000.txt
-65.6298406,535,7614,quadratic,10000.txt
-0.0247802,451,7,quadratic,200.txt
-2.3192488,535,93,quadratic,2000.txt
-14.8203980,535,1541,quadratic,5000.txt
-1419.0523331,535,39491,quadratic,50000.txt
+Tempo,Memï¿½ria,Valor,Algoritmo,Arquivo
+0.0064992,451,1,quadratic,100.txt
+0.5740002,479,273,quadratic,1000.txt
+65.6298406,535,7614,quadratic,10000.txt
+0.0247802,451,7,quadratic,200.txt
+2.3192488,535,93,quadratic,2000.txt
+14.8203980,535,1541,quadratic,5000.txt
+1419.0523331,535,39491,quadratic,50000.txt

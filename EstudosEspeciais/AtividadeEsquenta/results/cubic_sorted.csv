@@ -1,2 +1,5 @@
-Tempo,Memória,Valor,Algoritmo,Arquivo
-0.5993135,523,11,cubic,100.txt
+Tempo,MemÃ³ria,Valor,Algoritmo,Arquivo
+1.3526249,1009,129,cubic,200.txt
+0.1719412,529,72,cubic,100.txt
+165.3198801,557,209,cubic,1000.txt
+1287.0286565,613,429,cubic,2000.txt
