@@ -1,0 +1,8 @@
+Tempo,Memória,Valor,Algoritmo,Arquivo
+0.0058499,451,82,quadratic,100.txt
+0.5729390,535,804,quadratic,1000.txt
+56.8538906,479,175,quadratic,10000.txt
+0.0231005,451,201,quadratic,200.txt
+2.2685923,535,639,quadratic,2000.txt
+14.2117951,535,2650,quadratic,5000.txt
+1447.7477574,535,15861,quadratic,50000.txt

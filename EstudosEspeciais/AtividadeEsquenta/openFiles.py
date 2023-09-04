@@ -16,7 +16,7 @@ def parseDirectory(directory):
 def runSearches(vector, value, sortFunction):
     tracemalloc.start()
     startTime = time.time()
-    for i in range(20):
+    for i in range(2):
         if sortFunction == 'binary':
             result = searches.binary(vector, value, 0, len(vector) - 1)
         elif sortFunction == 'cubic':
@@ -33,7 +33,7 @@ def runSearches(vector, value, sortFunction):
     tracemalloc.stop()
     tracemalloc.clear_traces()
     endTime = time.time()
-    meddleTime = (endTime - startTime) / 20    
+    meddleTime = (endTime - startTime) / 2
     print('Função: ' + sortFunction, ' | Valor pesquisado: ' + str(value), ' | Tamanho do vetor: ' + str(len(vector)), ' | Resultado: ' + str(result))
     return [str(f'{meddleTime:.7f}'), (memory[1]), value, sortFunction, str(len(vector)) + '.txt']
 # Gera um vetor com os dados do arquivo
@@ -76,7 +76,7 @@ def iterationFiles(directory, algorithms, sorted):
 
 # Executa o programa
 if __name__ == "__main__":
-    directory = 'src/files/sorted/'
-    iterationFiles(directory, ['quadratic'], True)
+    # directory = 'src/files/sorted/'
+    # iterationFiles(directory, ['cubic'], True)
     directory = 'src/files/unsorted/'
-    iterationFiles(directory, ['quadratic'], False)
+    iterationFiles(directory, ['quadratic', 'cubic'], False)
