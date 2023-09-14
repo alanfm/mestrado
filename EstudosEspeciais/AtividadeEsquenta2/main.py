@@ -44,6 +44,7 @@ def parseFile(file, directory = ''):
 """
 def runSearches(vector, nameFunction):
     print('Executando função: ' + nameFunction)
+    memory = 0
     tracemalloc.start()
     startTime = time.time()
     iterations = 10
@@ -56,7 +57,7 @@ def runSearches(vector, nameFunction):
         else:
             result = 'Função não encontrada'
 
-    memory = tracemalloc.get_traced_memory()
+    memory += tracemalloc.get_traced_memory()[1]
     tracemalloc.stop()
     tracemalloc.clear_traces()
     endTime = time.time()
@@ -64,7 +65,7 @@ def runSearches(vector, nameFunction):
 
     print('Função: ' + nameFunction, ' | Tamanho do vetor: ' + str(len(vector)), ' | Resultado: ' + str(result))
 
-    return [str(f'{meddleTime:.7f}'), (memory[1]), nameFunction, str(len(vector)) + '.txt']
+    return [str(f'{meddleTime:.7f}'), (memory / iterations), nameFunction, str(len(vector)) + '.txt']
 
 """
     Executa todas as funções de busca e gera o arquivo de resultados
