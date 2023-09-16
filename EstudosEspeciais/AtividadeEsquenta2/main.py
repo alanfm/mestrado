@@ -47,7 +47,7 @@ def runSearches(vector, nameFunction):
     memory = 0
     tracemalloc.start()
     startTime = time.time()
-    iterations = 10
+    iterations = 20
 
     for i in range(iterations):
         if nameFunction == 'maxVal1':
